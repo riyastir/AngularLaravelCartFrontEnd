@@ -10,14 +10,14 @@ export class ApiService {
 	basic = 'Bearer '+localStorage.getItem('token');
   constructor(private httpClient: HttpClient) { }
   public getProducts(){
-    return this.httpClient.get(`http://127.0.0.1:8000/api/products`);
+    return this.httpClient.get(`http://api.cart.riyas.pro/api/products`);
   }
   public addToCart(user_id,product_id,qty){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': this.basic });
     let options = { headers: headers };
-    return this.httpClient.post(`http://127.0.0.1:8000/api/cart/add`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/cart/add`,{
 			"user_id":user_id,
 			"product_id":product_id,
 			"quantity":qty
@@ -28,7 +28,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': this.basic });
     let options = { headers: headers };
-    return this.httpClient.post(`http://127.0.0.1:8000/api/cart/view`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/cart/view`,{
 			"user_id":user_id
 	},options);
   }
@@ -37,7 +37,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': this.basic });
     let options = { headers: headers };
-    return this.httpClient.post(`http://127.0.0.1:8000/api/cart/clear`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/cart/clear`,{
 			"user_id":user_id
 	},options);
   }
@@ -46,7 +46,7 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': this.basic });
     let options = { headers: headers };
-    return this.httpClient.post(`http://127.0.0.1:8000/api/cart/remove`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/cart/remove`,{
       "user_id":user_id,
       "product_id":product_id
 	},options);
@@ -57,13 +57,13 @@ export class ApiService {
       'Content-Type': 'application/json',
       'Authorization': this.basic });
     let options = { headers: headers };
-    return this.httpClient.post(`http://127.0.0.1:8000/api/order/create`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/order/create`,{
       "user_id":user_id
 	},options);
   }
 
   public login(email,password){
-    return this.httpClient.post(`http://127.0.0.1:8000/api/login`,{
+    return this.httpClient.post(`http://api.cart.riyas.pro/api/login`,{
       "email":email,
       "password":password
 	})

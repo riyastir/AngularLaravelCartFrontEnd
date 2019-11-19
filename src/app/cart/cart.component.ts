@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
   itemsCount = 0;
   cartMessage = 'Your Cart is Loading...';
   userId = localStorage.getItem('user_id');
-  constructor(private apiService: ApiService,private router: Router) { 
+  constructor(private apiService: ApiService,private router: Router,private appMain: AppComponent) { 
     
   }
 
@@ -47,6 +48,7 @@ export class CartComponent implements OnInit {
       this.apiService.viewCart(this.userId).subscribe((items)=>{
         console.log(items['response']['items'].length);
         this.itemsCount = items['response']['items'].length;
+        this.appMain.cartItems = this.itemsCount;
         if(this.itemsCount == 0){
           this.cartMessage = 'Your Cart is Empty';
         }
@@ -66,6 +68,7 @@ export class CartComponent implements OnInit {
       this.apiService.viewCart(this.userId).subscribe((items)=>{
         console.log(items['response']['items'].length);
         this.itemsCount = items['response']['items'].length;
+        this.appMain.cartItems = this.itemsCount;
         this.items = items['response']['items'];
         this.total = items['response']['total'];
         this.data = data['response'];
@@ -89,6 +92,10 @@ export class CartComponent implements OnInit {
       this.apiService.viewCart(this.userId).subscribe((items)=>{
         console.log(items['response']['items'].length);
         this.itemsCount = items['response']['items'].length;
+        this.appMain.cartItems = this.itemsCount;
+        if(this.itemsCount == 0){
+          this.cartMessage = 'Your Cart is Empty';
+        }
         this.items = items['response']['items'];
         this.total = items['response']['total'];
         this.data = data['response'];
