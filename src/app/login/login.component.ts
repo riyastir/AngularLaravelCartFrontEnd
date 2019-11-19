@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   data;
   alert;
   type;
+  countItem;
   staticAlertClosed = true;
   constructor(private apiService: ApiService,private router: Router, private appMain: AppComponent) { }
 
@@ -38,6 +39,11 @@ export class LoginComponent implements OnInit {
       localStorage.token = data['success']['token'];
       this.appMain.userName = data['success']['name'];
       this.apiService.basic = 'Bearer '+localStorage.getItem('token');
+      this.apiService.viewCart(localStorage.getItem('user_id')).subscribe((data) => {
+        console.log(data['response']);
+        this.countItem = data['response'];
+        this.appMain.cartItems = this.countItem.count;
+      });
       this.router.navigateByUrl('/products');
       }
 		});
