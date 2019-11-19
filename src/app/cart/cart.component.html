@@ -1,0 +1,53 @@
+<div class="spec ">
+    <h3>Cart</h3>
+    <div class="ser-t">
+        <b></b>
+        <span><i></i></span>
+        <b class="line"></b>
+    </div>
+</div>
+<div class="modal-body">
+              <p>
+                <ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{alert}}</ngb-alert>
+              </p>
+    <div *ngIf="itemsCount == 0; else withData"> <h2 class="text-center">{{cartMessage}}</h2><br/></div>
+    <ng-template #withData>
+        <h3><a (click)="clearCart(3)"><span class="label label-danger">Clear Cart</span></a></h3>
+    <br/>
+    <table class="table table-hover table-responsive" id="my-cart-table" >
+        <tbody >
+            <tr title="summary 36" data-id="36" data-price="6.00" *ngFor="let item of items;let i = index">
+                <td class="text-center" style="width: 30px;"><img width="30px" height="30px"
+                        src="http://127.0.0.1:8000/storage/{{item.product_details.image}}"></td>
+                <td>{{item.product_details.name}}</td>
+                <td title="Unit Price">RM {{item.unit_price}}</td>
+                <td title="Quantity">
+                    <input type="number" min="1" style="width: 70px;" class="my-product-quantity"
+                        value="{{item.quantity}}">
+                </td>
+                <td title="Total" class="my-product-total">RM {{item.total_price}}</td>
+                <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" (click)="removeItem(3,item.product_id)"
+                        class="btn btn-xs btn-danger my-product-remove">X</a></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><strong>Total</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong id="my-cart-grand-total">RM {{total}}</strong></td>
+                <td></td>
+            </tr>
+            <tr style="color: red">
+                <td></td>
+                <td><strong>Total (including discount)</strong></td>
+                <td></td>
+                <td></td>
+                <td><strong id="my-cart-discount-price">RM {{total}}</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <h3><a (click)="createOrder()"><span class="label label-success">Checkout</span></a></h3>
+    <br/>
+</ng-template>
+</div>
