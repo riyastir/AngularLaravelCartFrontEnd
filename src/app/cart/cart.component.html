@@ -23,7 +23,7 @@
                 <td title="Unit Price">RM {{item.unit_price}}</td>
                 <td title="Quantity">
                     <input type="number" min="1" style="width: 70px;" class="my-product-quantity"
-                        value="{{item.quantity}}">
+                        value="{{item.quantity}}" disabled>
                 </td>
                 <td title="Total" class="my-product-total">RM {{item.total_price}}</td>
                 <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" (click)="removeItem(3,item.product_id)"
@@ -35,14 +35,6 @@
                 <td></td>
                 <td></td>
                 <td><strong id="my-cart-grand-total">RM {{total}}</strong></td>
-                <td></td>
-            </tr>
-            <tr style="color: red">
-                <td></td>
-                <td><strong>Total (including discount)</strong></td>
-                <td></td>
-                <td></td>
-                <td><strong id="my-cart-discount-price">RM {{total}}</strong></td>
                 <td></td>
             </tr>
         </tbody>
