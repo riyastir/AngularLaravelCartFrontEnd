@@ -15,14 +15,14 @@ export class AppComponent implements OnInit{
   cartItems;
   userName = localStorage.getItem('user_name');
   if(isSearchActive = false){
-    this.apiService.viewCart(localStorage.user_id).subscribe((data)=>{
+    this.apiService.viewCart().subscribe((data)=>{
       console.log(data['response']);
       this.data = data['response'];
     });
   }
   constructor(private apiService: ApiService,private router: Router){}
   ngOnInit(){
-    this.apiService.viewCart(localStorage.user_id).subscribe((data)=>{
+    this.apiService.viewCart().subscribe((data)=>{
       console.log(data['response']);
       this.data = data['response'];
       this.cartItems = this.data['count'];

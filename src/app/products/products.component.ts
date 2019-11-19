@@ -41,10 +41,10 @@ export class ProductsComponent implements OnInit {
     if (this.user_id != '') {
       this.qty = (<HTMLInputElement>document.getElementById('qty_' + product_id)).value;
       console.log(this.user_id, product_id, this.qty);
-      this.apiService.addToCart(this.user_id, product_id, this.qty).subscribe((data) => {
+      this.apiService.addToCart(product_id, this.qty).subscribe((data) => {
         console.log(data['response']);
         this.data = data['response'];
-        this.apiService.viewCart(localStorage.getItem('user_id')).subscribe((data) => {
+        this.apiService.viewCart().subscribe((data) => {
           console.log(data['response']);
           this.countItem = data['response'];
           this.appMain.cartItems = this.countItem.count;

@@ -27,7 +27,7 @@ export class CartComponent implements OnInit {
   ngOnInit(){
     setTimeout(() => this.staticAlertClosed = true, 20000);
     this.router.onSameUrlNavigation = 'reload';
-    this.apiService.viewCart(this.userId).subscribe((items)=>{
+    this.apiService.viewCart().subscribe((items)=>{
       console.log(items['response']['items'].length);
       this.itemsCount = items['response']['items'].length;
       if(this.itemsCount == 0){
@@ -37,15 +37,15 @@ export class CartComponent implements OnInit {
       this.total = items['response']['total'];
     });
 	}
-  public clearCart(user_id){
+  public clearCart(){
     this.alert = 'Your Cart is Cleared !';
     this.staticAlertClosed = false;
     this.itemsCount = 0;
     this.cartMessage = 'Your Cart is Loading';
-    this.apiService.clearCart(user_id).subscribe((data)=>{
+    this.apiService.clearCart().subscribe((data)=>{
 		  console.log(data['response']['status']);
       this.clear = data['response']['status'];
-      this.apiService.viewCart(this.userId).subscribe((items)=>{
+      this.apiService.viewCart().subscribe((items)=>{
         console.log(items['response']['items'].length);
         this.itemsCount = items['response']['items'].length;
         this.appMain.cartItems = this.itemsCount;
@@ -59,13 +59,13 @@ export class CartComponent implements OnInit {
     });
     
   }
-  public removeItem(user_id,product_id){
+  public removeItem(product_id){
     this.alert = 'You removed an item from your cart !';
     this.staticAlertClosed = false;
-    this.apiService.removeItem(user_id,product_id).subscribe((data)=>{
+    this.apiService.removeItem(product_id).subscribe((data)=>{
 		  console.log(data['response']['status']);
       this.remove = data['response']['status'];
-      this.apiService.viewCart(this.userId).subscribe((items)=>{
+      this.apiService.viewCart().subscribe((items)=>{
         console.log(items['response']['items'].length);
         this.itemsCount = items['response']['items'].length;
         this.appMain.cartItems = this.itemsCount;
@@ -82,23 +82,23 @@ export class CartComponent implements OnInit {
     this.staticAlertClosed = false;
     this.itemsCount = 0;
     this.cartMessage = 'Your Cart is Clearing';
-    this.apiService.createOrder(this.userId).subscribe((data)=>{
+    this.apiService.createOrder().subscribe((data)=>{
 		  console.log(data['response']);
       this.remove = data['response'];
-      this.apiService.clearCart(this.userId).subscribe((data)=>{
+      this.apiService.clearCart().subscribe((data)=>{
         console.log(data['response']['status']);
         this.clear = data['response']['status'];
-      });
-      this.apiService.viewCart(this.userId).subscribe((items)=>{
-        console.log(items['response']['items'].length);
-        this.itemsCount = items['response']['items'].length;
-        this.appMain.cartItems = this.itemsCount;
-        if(this.itemsCount == 0){
-          this.cartMessage = 'Your Cart is Empty';
-        }
-        this.items = items['response']['items'];
-        this.total = items['response']['total'];
-        this.data = data['response'];
+        this.apiService.viewCart().subscribe((items)=>{
+          console.log(items['response']['items'].length);
+          this.itemsCount = items['response']['items'].length;
+          this.appMain.cartItems = this.itemsCount;
+          if(this.itemsCount == 0){
+            this.cartMessage = 'Your Cart is Empty';
+          }
+          this.items = items['response']['items'];
+          this.total = items['response']['total'];
+          this.data = data['response'];
+        });
       });
     });
     

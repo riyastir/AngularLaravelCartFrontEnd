@@ -12,7 +12,6 @@
               </p>
     <div *ngIf="itemsCount == 0; else withData"> <h2 class="text-center">{{cartMessage}}</h2><br/></div>
     <ng-template #withData>
-        <h3><a (click)="clearCart(3)"><span class="label label-danger">Clear Cart</span></a></h3>
     <br/>
     <table class="table table-hover table-responsive" id="my-cart-table" >
         <tbody >
@@ -26,7 +25,7 @@
                         value="{{item.quantity}}" disabled>
                 </td>
                 <td title="Total" class="my-product-total">RM {{item.total_price}}</td>
-                <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" (click)="removeItem(3,item.product_id)"
+                <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" (click)="removeItem(item.product_id)"
                         class="btn btn-xs btn-danger my-product-remove">X</a></td>
             </tr>
             <tr>
@@ -39,7 +38,8 @@
             </tr>
         </tbody>
     </table>
-    <h3><a (click)="createOrder()"><span class="label label-success">Checkout</span></a></h3>
+    <h3><a (click)="createOrder()"><button class="btn btn-success pull-right">Checkout</button></a></h3>
+    <h3><a (click)="clearCart()"><button class="btn btn-danger pull-left">Clear Cart</button></a></h3>
     <br/>
 </ng-template>
 </div>
