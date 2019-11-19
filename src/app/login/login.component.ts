@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   alert;
   type;
   staticAlertClosed = true;
-  constructor(private apiService: ApiService,private router: Router) { }
+  constructor(private apiService: ApiService,private router: Router, private appMain: AppComponent) { }
 
   ngOnInit() {
   }
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
       localStorage.user_id = data['success']['user_id'];
       localStorage.user_name = data['success']['name'];
       localStorage.token = data['success']['token'];
+      this.appMain.userName = data['success']['name'];
+      this.apiService.basic = 'Bearer '+localStorage.getItem('token');
       this.router.navigateByUrl('/products');
       }
 		});

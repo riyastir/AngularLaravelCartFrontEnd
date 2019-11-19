@@ -14,7 +14,7 @@ import { CartIconComponent } from './cart-icon/cart-icon.component';
 const appRoutes: Routes = [
   { 
    path: '',
-   redirectTo: '/products',
+   redirectTo: '/login',
    pathMatch: 'full'
   },	
   {

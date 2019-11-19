@@ -15,7 +15,7 @@ export class ApiService {
   public addToCart(user_id,product_id,qty){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.basic });
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/cart/add`,{
 			"user_id":user_id,
@@ -26,7 +26,7 @@ export class ApiService {
   public viewCart(user_id){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.basic });
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/cart/view`,{
 			"user_id":user_id
@@ -35,7 +35,7 @@ export class ApiService {
   public clearCart(user_id){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.basic });
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/cart/clear`,{
 			"user_id":user_id
@@ -44,7 +44,7 @@ export class ApiService {
   public removeItem(user_id,product_id){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.basic });
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/cart/remove`,{
       "user_id":user_id,
@@ -55,7 +55,7 @@ export class ApiService {
   public createOrder(user_id){
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.basic });
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/order/create`,{
       "user_id":user_id
