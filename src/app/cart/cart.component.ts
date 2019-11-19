@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   remove;
   data;
   itemsCount = 0;
+  qty;
   cartMessage = 'Your Cart is Loading...';
   userId = localStorage.getItem('user_id');
   constructor(private apiService: ApiService,private router: Router,private appMain: AppComponent) { 
@@ -102,5 +103,24 @@ export class CartComponent implements OnInit {
       });
     });
     
+  }
+  public swapQuantity(product_id) {
+    this.alert = 'Quantity Updated !';
+    this.staticAlertClosed = false;
+    this.qty = (<HTMLInputElement>document.getElementById('qty_' + product_id)).value;
+      this.apiService.swapQuantity(product_id, this.qty).subscribe((data) => {
+        console.log(data['response']);
+        this.data = data['response'];
+        this.apiService.viewCart().subscribe((items) => {
+          console.log(items['response']['items'].length);
+          this.itemsCount = items['response']['items'].length;
+          if(this.itemsCount == 0){
+            this.cartMessage = 'Your Cart is Empty';
+          }
+          this.items = items['response']['items'];
+          this.total = items['response']['total'];
+          this.appMain.cartItems = items['response'].count;
+        });
+      });
   }
 }

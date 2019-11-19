@@ -20,6 +20,10 @@
 						<img src="https://api.cart.riyas.pro/storage/{{product.image}}" class="img-responsive" alt="">
 					</a>
 					Qty <input class="form-control" type="number" name="qty" id="qty_{{product.id}}" min="1" value="1">
+					<small *ngIf="product.discount_text!=null else default" class="text-danger">{{product.discount_text}}</small>
+					<ng-template #default>
+					<small>&nbsp;&nbsp;&nbsp;&nbsp;</small>
+					</ng-template>
 					<div class="mid-1">
 						<div class="women">
 							<h6><a>{{product.name}}</a></h6>

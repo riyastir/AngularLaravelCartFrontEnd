@@ -10,7 +10,11 @@ export class ApiService {
 	basic = 'Bearer '+localStorage.getItem('token');
   constructor(private httpClient: HttpClient) { }
   public getProducts(){
-    return this.httpClient.get(`https://api.cart.riyas.pro/api/products`);
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
+    let options = { headers: headers };
+    return this.httpClient.get(`https://api.cart.riyas.pro/api/products`,options);
   }
   public addToCart(product_id,qty){
     let headers = new HttpHeaders({
@@ -52,6 +56,17 @@ export class ApiService {
       'Authorization': 'Bearer '+localStorage.getItem('token') });
     let options = { headers: headers };
     return this.httpClient.post(`https://api.cart.riyas.pro/api/order/create`,{},options);
+  }
+
+  public swapQuantity(product_id,qty){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+localStorage.getItem('token') });
+    let options = { headers: headers };
+    return this.httpClient.post(`https://api.cart.riyas.pro/api/cart/swap`,{
+      "product_id":product_id,
+			"quantity":qty
+    },options);
   }
 
   public login(email,password){

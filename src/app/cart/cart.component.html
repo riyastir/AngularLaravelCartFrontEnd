@@ -22,7 +22,7 @@
                 <td title="Unit Price">RM {{item.unit_price}}</td>
                 <td title="Quantity">
                     <input type="number" min="1" style="width: 70px;" class="my-product-quantity"
-                        value="{{item.quantity}}" disabled>
+                        value="{{item.quantity}}" name="qty" id="qty_{{item.product_id}}" (change)="swapQuantity(item.product_id)">
                 </td>
                 <td title="Total" class="my-product-total">RM {{item.total_price}}</td>
                 <td title="Remove from Cart" class="text-center" style="width: 30px;"><a href="javascript:void(0);" (click)="removeItem(item.product_id)"
