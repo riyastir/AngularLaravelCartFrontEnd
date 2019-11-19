@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit {
     this.user_id = localStorage.getItem('user_id');
     this.setStatus(false);
     if (this.user_id != '') {
-      this.qty = document.getElementById('qty_' + product_id).value;
+      this.qty = (<HTMLInputElement>document.getElementById('qty_' + product_id)).value;
       console.log(this.user_id, product_id, this.qty);
       this.apiService.addToCart(this.user_id, product_id, this.qty).subscribe((data) => {
         console.log(data['response']);
