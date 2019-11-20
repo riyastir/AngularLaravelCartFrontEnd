@@ -9,12 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
-import { CartIconComponent } from './cart-icon/cart-icon.component';
 
 const appRoutes: Routes = [
   { 
    path: '',
-   redirectTo: '/login',
+   redirectTo: '/products',
    pathMatch: 'full'
   },	
   {
@@ -39,8 +38,7 @@ const appRoutes: Routes = [
     ProductsComponent,
     HomeComponent,
     CartComponent,
-    LoginComponent,
-    CartIconComponent
+    LoginComponent
   ],
   imports: [
 	RouterModule.forRoot(
