@@ -1,28 +1,48 @@
 import { Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppComponent } from '../app.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class LoginComponent implements OnInit {
   data;
   alert;
   type;
   countItem;
   staticAlertClosed = true;
-  constructor(private apiService: ApiService,private router: Router, private appMain: AppComponent) { }
+  loginForm: FormGroup;
+  submitted = false;
+  constructor(
+    private apiService: ApiService,
+    private router: Router, 
+    private appMain: AppComponent,
+    private formBuilder: FormBuilder,
+    ) { }
 
   ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+  });
   }
-  public login(email,password){
+  get f() { return this.loginForm.controls; }
+  onSubmit() {
+    console.log('Clicked');
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
     this.alert = 'Logging In !';
     this.type='warning';
     this.staticAlertClosed = false;
-    this.apiService.login(email,password).subscribe((data)=>{
+    this.apiService.login(this.f.email.value,this.f.password.value).subscribe((data)=>{
       if(data['status']=='401'){
         this.alert = 'Login Failed ! Check Username or Password';
         this.type='danger';

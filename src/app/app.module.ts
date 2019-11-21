@@ -7,13 +7,14 @@ import { ProductsComponent } from './products/products.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   { 
    path: '',
-   redirectTo: '/products',
+   redirectTo: '/login',
    pathMatch: 'full'
   },	
   {
@@ -47,7 +48,9 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     HttpClientModule,
-	NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule 
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

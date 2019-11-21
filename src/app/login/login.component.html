@@ -12,19 +12,28 @@
             <div class="main-agileits">
                     <div class="form-w3agile">
                         <h3>Login</h3>
-                        <form action="#" method="post">
+                        <form [formGroup]="loginForm" action="#" method="post" (ngSubmit)="onSubmit()">
+                            <div *ngIf="submitted && f.email.errors" id="emailErrorMsg" class="text-danger">
+                            <div *ngIf="f.email.errors.required">Email is required</div>
+                            </div>
                             <div class="key">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
-                                <input  #email type="text" value="Email" name="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                                <input  #email formControlName="email" type="text" value="Email" name="Email" >
                                 <div class="clearfix"></div>
                             </div>
+                            
+                            <div *ngIf="submitted && f.password.errors" id="passwordErrorMsg" class="text-danger">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                    </div>
                             <div class="key">
                                 <i class="fa fa-lock" aria-hidden="true"></i>
-                                <input  #password type="password" value="Password" name="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" required="">
+                                <input  #password type="password" formControlName="password" value="Password" name="Password" >
                                 <div class="clearfix"></div>
                             </div>
-                            <input type="button" value="Login" (click)="login(email.value,password.value)">
+                           
+                            <button id="loginBtn" value="Login" class="btn btn-success" >Login</button>
                         </form>
+                        <br/>
                               <p>
                                 <ngb-alert [type]="type" *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">{{alert}}</ngb-alert>
                               </p>
