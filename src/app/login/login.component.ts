@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
   });
+  if(localStorage.getItem('user_id')!=''){
+	  this.router.navigateByUrl('/products');
+  }
   }
   get f() { return this.loginForm.controls; }
   onSubmit() {
